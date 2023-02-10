@@ -11,7 +11,7 @@ module.exports = {
 				ice: "#a0d2eb",
 				freezePurple: "#e5eaf5",
 				mediumPurple: "#d0bdf4",
-				PurplePlain: "#8458B3",
+				purplePlain: "#8458B3",
 				heavyPurple: "#a28089",
 			},
 		},

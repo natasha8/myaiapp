@@ -10,10 +10,10 @@ h1 {
 
 @layer components {
 	.homeBox {
-		@apply m-4 p-4 rounded-lg max-w-[300px] bg-PurplePlain;
+		@apply m-4 p-4 rounded-lg max-w-[300px] bg-purplePlain;
 	}
 	.chatRow {
 		@apply rounded-lg px-5 text-sm py-3 flex items-center justify-center 
-        space-x-2 hover: text-mediumPurple transition-all duration-200 ease-out;
+        space-x-2 hover:bg-mediumPurple transition-all duration-200 ease-out;
 	}
 }
