@@ -1,20 +1,31 @@
 "use client";
 import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import {
+	addDoc,
+	collection,
+	orderBy,
+	query,
+	serverTimestamp,
+} from "firebase/firestore";
 import { useSession } from "next-auth/react";
 import { FormEvent, useState } from "react";
+import { toast } from "react-hot-toast";
 import { db } from "../firebase";
+import useSWR from "swr";
 
 type Props = {
 	chatId: string;
 };
 
-const ChatInput = ({ chatId }: Props) => {
+function ChatInput({ chatId }: Props) {
 	const [prompt, setPrompt] = useState("");
 	const { data: session } = useSession();
 
 	//useSWR
-	const model = "davinci";
+	//const model = "davinci";
+	const { data: model } = useSWR("model", {
+		fallbackData: "text-davinci-003",
+	});
 
 	const sendPrompt = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -23,6 +34,7 @@ const ChatInput = ({ chatId }: Props) => {
 
 		const input = prompt.trim();
 		setPrompt("");
+		console.log("input", input);
 
 		const message: Message = {
 			text: input,
@@ -35,31 +47,33 @@ const ChatInput = ({ chatId }: Props) => {
 					`https://ui-avatar.com/api/?name=${session?.user?.name}`,
 			},
 		};
+		console.log("message", message);
 
-		try {
-			await addDoc(
-				collection(
-					db,
-					"users",
-					session?.user?.email!,
-					"chats",
-					chatId,
-					"messages"
-				),
-				message
-			);
-			await fetch("/api/askQuestion", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({ prompt: input, chatId, model, session }),
-			}).then((res) => {
-				toast.success("ChatGPT has responded!", {
-					id: notification,
-				});
+		await addDoc(
+			collection(
+				db,
+				"users",
+				session?.user?.email!,
+				"chats",
+				chatId,
+				"messages"
+			),
+			message
+		);
+
+		const notification = toast.loading("Thinking...");
+
+		await fetch("/api/askQuestion", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ prompt: input, chatId, model, session }),
+		}).then(() => {
+			toast.success("MYAI has responded!", {
+				id: notification,
 			});
-		} catch (error) {}
+		});
 	};
 
 	return (
@@ -84,6 +98,6 @@ const ChatInput = ({ chatId }: Props) => {
 			<div></div>
 		</div>
 	);
-};
+}
 
 export default ChatInput;
