@@ -3,6 +3,7 @@ import query from "../../lib/queryApi";
 import type { NextApiRequest, NextApiResponse } from "next";
 import admin from "firebase-admin";
 import { adminDb } from "../../firebaseAdmin";
+import { toast } from "react-hot-toast";
 
 type Data = {
 	answer: string;
@@ -12,40 +13,44 @@ export default async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse<Data>
 ) {
-	const { prompt, chatId, model, session } = req.body;
+	const { prompt, chatId, session, model } = req.body;
 
-	if (!prompt) {
-		res.status(400).json({ answer: "Please provide a prompt!" });
-		return;
+	//const model = "text-davinci-003";
+
+	try {
+		if (!prompt) {
+			res.status(400).json({ answer: "Please provide a prompt!" });
+			return;
+		}
+		if (!chatId) {
+			res.status(400).json({ answer: "Please enter a chat!" });
+			return;
+		}
+
+		const response = await query(prompt, chatId, model);
+		console.log("RESPONSE TEXT", response);
+		const message: Message = {
+			text: response,
+			createdAt: admin.firestore.Timestamp.now(),
+			user: {
+				_id: "MYAI",
+				name: "MYAI",
+				avatar: "https://i.ibb.co/T2dPt9f/MYAI-logo.jpg",
+			},
+		};
+
+		await adminDb
+			.collection("users")
+			.doc(session?.user?.email)
+			.collection("chats")
+			.doc(chatId)
+			.collection("messages")
+			.add(message);
+
+		res.status(200).json({
+			answer: message.text,
+		});
+	} catch (error) {
+		toast.error("MYAI can't respond!");
 	}
-
-	if (!chatId) {
-		res.status(400).json({ answer: "Please enter a chat!" });
-		return;
-	}
-
-	const response = query(prompt, chatId, model);
-	console.log("response", response);
-
-	const message: Message = {
-		text: "MYAI was unable to find an answer for that!",
-		createdAt: admin.firestore.Timestamp.now(),
-		user: {
-			_id: "MYAI",
-			name: "MYAI",
-			avatar: "https://i.ibb.co/T2dPt9f/MYAI-logo.jpg",
-		},
-	};
-
-	await adminDb
-		.collection("users")
-		.doc(session?.user?.email)
-		.collection("chats")
-		.doc(chatId)
-		.collection("messages")
-		.add(message);
-
-	res.status(200).json({
-		answer: message.text,
-	});
 }

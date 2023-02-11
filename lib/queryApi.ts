@@ -1,8 +1,11 @@
 import { openai } from "./chatgpt";
 
 const query = async (prompt: string, chatId: string, model: string) => {
-	try {
-		const res = await openai.createCompletion({
+	console.log("model", model);
+	let response: any;
+
+	await openai
+		.createCompletion({
 			model,
 			prompt,
 			temperature: 0.9,
@@ -10,14 +13,17 @@ const query = async (prompt: string, chatId: string, model: string) => {
 			top_p: 1,
 			frequency_penalty: 0.0,
 			presence_penalty: 0.0,
-		});
-		const json = res.data.choices[0].text;
-		return json;
-	} catch (err) {
-		console.log(
-			`MYAI was unable to find an answer for that! (Error: ${err})`
+		})
+		.then((res) => {
+			console.log("RESPONSE DATA ====>", res.data.choices[0].text);
+
+			response = res.data.choices[0].text;
+		})
+		.catch(
+			(err) =>
+				` MYAI was unable to find an answer for that! (Error: ${err.message})`
 		);
-	}
+	return response;
 };
 
 export default query;

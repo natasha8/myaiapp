@@ -2,10 +2,12 @@ import { PlusIcon } from "@heroicons/react/24/solid";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
 import { db } from "../firebase";
 
 function NewChat() {
 	const { data: session } = useSession();
+
 	const router = useRouter();
 
 	const createChat = async () => {
@@ -20,14 +22,17 @@ function NewChat() {
 			);
 			router.push(`/chat/${doc.id}`);
 		} catch (error) {
-			console.error(error);
-			alert(error);
+			toast.error("OPS...Something went wrong");
 		}
 	};
 
 	return (
-		<div className="w-20" onClick={createChat}>
-			<PlusIcon />
+		<div
+			className="flex items-center border rounded-xl bg-mediumPurple/20 mt-8 mb-4 p-2 space-x-2"
+			onClick={createChat}
+		>
+			<PlusIcon className="w-8 h-8 " />
+			<p className="uppercase font-bold text-2xl">new chat</p>
 		</div>
 	);
 }

@@ -12,6 +12,7 @@ import { FormEvent, useState } from "react";
 import { toast } from "react-hot-toast";
 import { db } from "../firebase";
 import useSWR from "swr";
+import ModelSelection from "./ModelSelection";
 
 type Props = {
 	chatId: string;
@@ -23,7 +24,7 @@ function ChatInput({ chatId }: Props) {
 
 	//useSWR
 	//const model = "davinci";
-	const { data: model } = useSWR("model", {
+	const { data: model } = useSWR("models", {
 		fallbackData: "text-davinci-003",
 	});
 
@@ -34,7 +35,7 @@ function ChatInput({ chatId }: Props) {
 
 		const input = prompt.trim();
 		setPrompt("");
-		console.log("input", input);
+		// console.log("input", input);
 
 		const message: Message = {
 			text: input,
@@ -47,7 +48,6 @@ function ChatInput({ chatId }: Props) {
 					`https://ui-avatar.com/api/?name=${session?.user?.name}`,
 			},
 		};
-		console.log("message", message);
 
 		await addDoc(
 			collection(
@@ -61,7 +61,7 @@ function ChatInput({ chatId }: Props) {
 			message
 		);
 
-		const notification = toast.loading("Thinking...");
+		const notification = toast.loading("MYAI is thinking...");
 
 		await fetch("/api/askQuestion", {
 			method: "POST",
@@ -69,11 +69,15 @@ function ChatInput({ chatId }: Props) {
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({ prompt: input, chatId, model, session }),
-		}).then(() => {
-			toast.success("MYAI has responded!", {
-				id: notification,
+		})
+			.then(() => {
+				toast.success("MYAI has responded!", {
+					id: notification,
+				});
+			})
+			.catch((err) => {
+				toast.error("Sorry MYAI can't reply!");
 			});
-		});
 	};
 
 	return (
@@ -95,7 +99,9 @@ function ChatInput({ chatId }: Props) {
 					<PaperAirplaneIcon className="w-6 h-6" />
 				</button>
 			</form>
-			<div></div>
+			<div className="lg:hidden">
+				<ModelSelection />
+			</div>
 		</div>
 	);
 }

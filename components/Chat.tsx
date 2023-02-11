@@ -27,10 +27,6 @@ const Chat = ({ chatId }: Props) => {
 			)
 	);
 
-	messages?.docs.map((message) => {
-		console.log("MESSAGE IN CHAT", message.data());
-	});
-
 	return (
 		<div className="flex-1">
 			{messages?.empty && (
