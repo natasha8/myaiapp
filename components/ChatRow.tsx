@@ -3,14 +3,15 @@ import { collection, deleteDoc, doc, orderBy, query } from "firebase/firestore";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { MouseEventHandler, useEffect, useState } from "react";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { db } from "../firebase";
 
 type Props = {
 	id: string;
+	handler: MouseEventHandler;
 };
-const ChatRow = ({ id }: Props) => {
+const ChatRow = ({ id, handler }: Props) => {
 	const pathname = usePathname();
 	const router = useRouter();
 	const { data: session } = useSession();
@@ -42,15 +43,20 @@ const ChatRow = ({ id }: Props) => {
 				active && "bg-mediumPurple font-bold"
 			}`}
 		>
-			<ChatBubbleLeftIcon className="h-6 w-6" />
-			<p className="flex-1 hidden md:inline-flex truncate">
-				{messages?.docs[messages?.docs.length - 1]?.data().text ||
-					"Empty Chat"}
-			</p>
-			<TrashIcon
-				className="h-6 w-6 text-gray-500 hover:text-red-500"
-				onClick={deleteChat}
-			/>
+			<div
+				className="w-full flex justify-between space-x-2"
+				onClick={handler}
+			>
+				<ChatBubbleLeftIcon className="h-6 w-6" />
+				<p className="flex-1 truncate">
+					{messages?.docs[messages?.docs.length - 1]?.data().text ||
+						"Empty Chat"}
+				</p>
+				<TrashIcon
+					className="h-6 w-6 text-gray-500 hover:text-red-500"
+					onClick={deleteChat}
+				/>
+			</div>
 		</Link>
 	);
 };

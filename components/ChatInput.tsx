@@ -12,7 +12,6 @@ import { FormEvent, useState } from "react";
 import { toast } from "react-hot-toast";
 import { db } from "../firebase";
 import useSWR from "swr";
-import ModelSelection from "./ModelSelection";
 
 type Props = {
 	chatId: string;
@@ -81,7 +80,7 @@ function ChatInput({ chatId }: Props) {
 	};
 
 	return (
-		<div className="w-full bg-purplePlain mx-auto p-4 ring-none outline-none">
+		<div className="w-full bg-purplePlain p-4 ring-none outline-none rounded-b-3xl md:rounded-bl-none">
 			<form onSubmit={sendPrompt} className="flex items-center space-x-2">
 				<input
 					type="text"
@@ -99,9 +98,6 @@ function ChatInput({ chatId }: Props) {
 					<PaperAirplaneIcon className="w-6 h-6" />
 				</button>
 			</form>
-			<div className="lg:hidden">
-				<ModelSelection />
-			</div>
 		</div>
 	);
 }

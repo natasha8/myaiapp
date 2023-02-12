@@ -18,22 +18,28 @@ export default async function RootLayout({
 			<head />
 			<body>
 				<SessionProvider session={session}>
-					{!session ? (
-						<Login />
-					) : (
-						<div className="flex w-screen h-screen">
-							{/* Sidebar */}
-							<div className="bg-ice max-w-xs h-screen overflow-y-auto md:min-w-[15rem]">
-								<SideBar />
+					<>
+						{!session ? (
+							<div className="flex justify-center items-center w-screen min-h-screen md:h-screen bg-black">
+								<Login />
 							</div>
-							{/*Client Provider  - Notification */}
-							<ClientProvider />
-							{/*  */}
-							<div className="bg-mediumPurple flex-1">
-								{children}
+						) : (
+							<div className="flex justify-center md:items-center w-screen min-h-screen h-screen bg-black">
+								{/* Sidebar */}
+								<div className="w-11/12 2xl:w-5/12 flex flex-col py-8 md:flex-row ">
+									<div className=" md:max-w-xs">
+										<SideBar />
+									</div>
+									{/*Client Provider  - Notification */}
+									<ClientProvider />
+									{/*  */}
+									<div className="bg-[#BB84E8]/80 flex-1  rounded-b-3xl md:rounded-r-3xl md:rounded-bl-none">
+										{children}
+									</div>
+								</div>
 							</div>
-						</div>
-					)}
+						)}
+					</>
 				</SessionProvider>
 			</body>
 		</html>

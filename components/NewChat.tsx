@@ -32,6 +32,7 @@ function NewChat() {
 			onClick={createChat}
 		>
 			<PlusIcon className="w-8 h-8 " />
+
 			<p className="uppercase font-bold text-2xl">new chat</p>
 		</div>
 	);

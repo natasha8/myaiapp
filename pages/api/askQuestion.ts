@@ -13,9 +13,9 @@ export default async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse<Data>
 ) {
-	const { prompt, chatId, session, model } = req.body;
+	const { prompt, chatId, session } = req.body;
 
-	//const model = "text-davinci-003";
+	const model = "text-davinci-003";
 
 	try {
 		if (!prompt) {
@@ -35,7 +35,7 @@ export default async function handler(
 			user: {
 				_id: "MYAI",
 				name: "MYAI",
-				avatar: "https://i.ibb.co/T2dPt9f/MYAI-logo.jpg",
+				avatar: "https://i.ibb.co/wRMymzV/homerobot.png",
 			},
 		};
 

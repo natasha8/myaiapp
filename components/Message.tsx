@@ -9,15 +9,17 @@ function Message({ message }: Props) {
 
 	return (
 		<div
-			className={`p-4 border rounded-xl ${isMYAI && "bg-purplePlain/50"}`}
+			className={` m-2 p-4 border rounded-xl ${
+				isMYAI && "bg-purplePlain/50"
+			}`}
 		>
-			<div className="flex  items-center space-x-4 max-w-2xl ">
+			<div className="flex items-center space-x-4 ">
 				<img
 					src={message.user.avatar}
 					alt="avatar"
 					className="rounded-full h-16 w-16 my-2"
 				/>
-				<p>{message.text}</p>
+				<pre className="w-full break-all">{message.text}</pre>
 			</div>
 		</div>
 	);
