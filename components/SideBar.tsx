@@ -33,7 +33,7 @@ function SideBar() {
 
 	return (
 		<>
-			<div className="p-2 flex justify-center items-center md:flex-col md:h-[80vh] bg-ice rounded-t-3xl md:rounded-l-3xl md:rounded-tr-none">
+			<div className="p-2 flex justify-center items-center md:flex-col md:h-[90vh] bg-ice md:rounded-l-3xl">
 				<div className="w-full flex-1">
 					<div className="hidden md:flex flex-col pt-4">
 						<Image
@@ -83,7 +83,7 @@ function SideBar() {
 					/>
 				)}
 				{open && (
-					<div className="md:hidden absolute z-50 w-11/12 top-28 bg-ice pb-4">
+					<div className="md:hidden absolute z-50 w-full top-20 pb-4 bg-ice">
 						<div className="w-full pl-4 pt-2 flex justify-end pr-4">
 							<GrClose
 								className="w-8 h-8 p-2 bg-white rounded-full"

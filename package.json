@@ -20,6 +20,7 @@
 		"react-icons": "^4.7.1",
 		"react-select": "^5.7.0",
 		"swr": "^2.0.3",
+		"tailwind-scrollbar": "^2.1.0",
 		"windups": "^1.2.1"
 	},
 	"devDependencies": {

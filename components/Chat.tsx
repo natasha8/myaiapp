@@ -28,7 +28,7 @@ const Chat = ({ chatId }: Props) => {
 	);
 
 	return (
-		<div className="flex-1 space-y-4">
+		<div className="flex-1 space-y-4 mt-20 md:mt-0 h-2/3">
 			{messages?.empty && (
 				<>
 					<p className="mt-10 text-center text-white">
@@ -37,9 +37,11 @@ const Chat = ({ chatId }: Props) => {
 					<ArrowDownCircleIcon className="h-10 w-10 min-w-full mx-auto mt-5 text-white animate-bounce" />
 				</>
 			)}
-			{messages?.docs.map((message) => (
-				<Message key={message.id} message={message.data()} />
-			))}
+			<div className="h-full scrollbar-thin scrollbar-thumb-white scrollbar-track-transparent overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full px-2">
+				{messages?.docs.map((message) => (
+					<Message key={message.id} message={message.data()} />
+				))}
+			</div>
 		</div>
 	);
 };

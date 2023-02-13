@@ -5,7 +5,7 @@ import NewChat from "./NewChat";
 export const AuntieWindup = () => {
 	const { data: session } = useSession();
 	return (
-		<div className="w-full h-full flex flex-col justify-center items-center">
+		<div className="w-full h-[80vh] flex flex-col justify-center items-center">
 			<div className="h-[15rem]">
 				<img src="https://i.ibb.co/wRMymzV/homerobot.png" />
 			</div>

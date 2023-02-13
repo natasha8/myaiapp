@@ -24,16 +24,16 @@ export default async function RootLayout({
 								<Login />
 							</div>
 						) : (
-							<div className="flex justify-center md:items-center w-screen min-h-screen h-screen bg-black">
+							<div className="flex justify-center md:items-center w-screen h-screen  md:bg-black">
 								{/* Sidebar */}
-								<div className="w-11/12 2xl:w-5/12 flex flex-col py-8 md:flex-row ">
-									<div className=" md:max-w-xs">
+								<div className="h-full w-full md:w-11/12 2xl:w-3/4 flex flex-col items-center md:py-8 md:flex-row ">
+									<div className="w-full fixed top-0 md:static  md:max-w-xs">
 										<SideBar />
 									</div>
 									{/*Client Provider  - Notification */}
 									<ClientProvider />
 									{/*  */}
-									<div className="bg-[#BB84E8]/80 flex-1  rounded-b-3xl md:rounded-r-3xl md:rounded-bl-none">
+									<div className="w-full h-full md:h-auto bg-[#BB84E8]/80 flex-1 md:rounded-r-3xl ">
 										{children}
 									</div>
 								</div>
