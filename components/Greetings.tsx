@@ -9,16 +9,16 @@ export const AuntieWindup = () => {
 			<div className="h-[15rem]">
 				<img src="https://i.ibb.co/wRMymzV/homerobot.png" />
 			</div>
-			<div className="w-2/3 space-y-8">
+			<div className="w-2/3 space-y-4 md:space-y-8">
 				<WindupChildren>
 					<Pace getPace={(char) => (char === " " ? 400 : 40)}>
-						<div className="text-6xl text-black">{"WELCOME"}</div>
-						<div className="text-4xl">{`${session?.user
-							?.name!}, my name is MYAI`}</div>
-
-						<div className="text-4xl">
-							{"your personal AI assistant."}
+						<div className="text-lg md:text-6xl text-black font-bold">
+							{`WELCOME ${session?.user?.name!}`}
 						</div>
+						<div className="md:text-4xl font-mono">
+							{`my name is MYAI your personal AI assistant.`}
+						</div>
+
 						<div className="text-black font-extrabold">
 							<NewChat />
 						</div>

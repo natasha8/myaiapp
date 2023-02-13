@@ -9,7 +9,7 @@ function Message({ message }: Props) {
 
 	return (
 		<div
-			className={` m-2 p-4 border rounded-xl ${
+			className={`m-2 p-4 border rounded-xl ${
 				isMYAI && "bg-purplePlain/50"
 			}`}
 		>
@@ -19,7 +19,7 @@ function Message({ message }: Props) {
 					alt="avatar"
 					className="rounded-full h-16 w-16 my-2"
 				/>
-				<pre className="w-full break-all">{message.text}</pre>
+				<div className="whitespace-pre-line">{message.text}</div>
 			</div>
 		</div>
 	);
