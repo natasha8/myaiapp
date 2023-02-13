@@ -1,11 +1,11 @@
-import { ChatBubbleLeftIcon, TrashIcon } from "@heroicons/react/24/solid";
-import { collection, deleteDoc, doc, orderBy, query } from "firebase/firestore";
+import { collection, deleteDoc, doc } from "firebase/firestore";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { MouseEventHandler, useEffect, useState } from "react";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { db } from "../firebase";
+import { TbRobot, TbTrashX } from "react-icons/tb";
 
 type Props = {
 	id: string;
@@ -44,16 +44,16 @@ const ChatRow = ({ id, handler }: Props) => {
 			}`}
 		>
 			<div
-				className="w-full flex justify-between space-x-2"
+				className="w-full flex justify-between items-center space-x-2"
 				onClick={handler}
 			>
-				<ChatBubbleLeftIcon className="h-6 w-6" />
-				<p className="flex-1 truncate">
+				<TbRobot className="h-6 w-6 font-extrabold" />
+				<p className="flex-1 truncate font-bold">
 					{messages?.docs[messages?.docs.length - 1]?.data().text ||
 						"Empty Chat"}
 				</p>
-				<TrashIcon
-					className="h-6 w-6 text-gray-500 hover:text-red-500"
+				<TbTrashX
+					className="h-6 w-6 text-black font-extrabold  hover:text-red-500"
 					onClick={deleteChat}
 				/>
 			</div>

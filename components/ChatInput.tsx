@@ -1,12 +1,6 @@
 "use client";
-import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
-import {
-	addDoc,
-	collection,
-	orderBy,
-	query,
-	serverTimestamp,
-} from "firebase/firestore";
+import { CiPaperplane } from "react-icons/ci";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useSession } from "next-auth/react";
 import { FormEvent, useState } from "react";
 import { toast } from "react-hot-toast";
@@ -95,7 +89,7 @@ function ChatInput({ chatId }: Props) {
 					className="bg-ice hover:opacity-50 text-white font-bold py-2 px-4 rounded disabled:bg-gray-300 disabled:cursor-not-allowed"
 					type="submit"
 				>
-					<PaperAirplaneIcon className="w-6 h-6" />
+					<CiPaperplane className="w-6 h-6 text-purplePlain" />
 				</button>
 			</form>
 		</div>

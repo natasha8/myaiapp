@@ -1,5 +1,5 @@
 "use client";
-import { ArrowDownCircleIcon } from "@heroicons/react/24/solid";
+import { BsArrowDownCircle } from "react-icons/bs";
 import { collection, orderBy, query } from "firebase/firestore";
 import { useSession } from "next-auth/react";
 import { useCollection } from "react-firebase-hooks/firestore";
@@ -31,10 +31,10 @@ const Chat = ({ chatId }: Props) => {
 		<div className="flex-1 space-y-4 mt-20 md:mt-0 h-2/3">
 			{messages?.empty && (
 				<>
-					<p className="mt-10 text-center text-white">
+					<p className="mt-10 text-center text-white text-xl">
 						Type a prompt in below to get started!
 					</p>
-					<ArrowDownCircleIcon className="h-10 w-10 min-w-full mx-auto mt-5 text-white animate-bounce" />
+					<BsArrowDownCircle className="h-8 w-8 min-w-full mx-auto mt-5 text-white animate-bounce" />
 				</>
 			)}
 			<div className="h-full scrollbar-thin scrollbar-thumb-white scrollbar-track-transparent overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full px-2">

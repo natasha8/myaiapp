@@ -1,4 +1,4 @@
-import { PlusIcon } from "@heroicons/react/24/solid";
+import { BsPlusLg } from "react-icons/bs";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -31,7 +31,7 @@ function NewChat() {
 			className="flex items-center border rounded-xl bg-mediumPurple/20 mt-8 mb-4 p-2 space-x-2"
 			onClick={createChat}
 		>
-			<PlusIcon className="w-8 h-8 " />
+			<BsPlusLg className="w-8 h-8  px-2" />
 
 			<p className="uppercase font-bold text-2xl">new chat</p>
 		</div>

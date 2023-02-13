@@ -1,11 +1,11 @@
 import { useSession } from "next-auth/react";
-import { Linebreaker, Pace, WindupChildren } from "windups";
+import { Pace, WindupChildren } from "windups";
 import NewChat from "./NewChat";
 
 export const AuntieWindup = () => {
 	const { data: session } = useSession();
 	return (
-		<div className="w-full h-[80vh] flex flex-col justify-center items-center">
+		<div className="w-full h-[90vh] flex flex-col justify-center items-center">
 			<div className="h-[15rem]">
 				<img src="https://i.ibb.co/wRMymzV/homerobot.png" />
 			</div>
@@ -15,7 +15,7 @@ export const AuntieWindup = () => {
 						<div className="text-lg md:text-6xl text-black font-bold">
 							{`WELCOME ${session?.user?.name!}`}
 						</div>
-						<div className="md:text-4xl font-mono">
+						<div className="md:text-4xl">
 							{`my name is MYAI your personal AI assistant.`}
 						</div>
 

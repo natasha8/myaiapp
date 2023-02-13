@@ -61,7 +61,7 @@ function SideBar() {
 							))}
 						</div>
 					</div>
-					<div className="w-full flex  items-center md:hidden">
+					<div className="w-full flex items-center md:hidden">
 						<BsThreeDotsVertical
 							className="w-10 h-10"
 							onClick={handleChats}
@@ -79,7 +79,7 @@ function SideBar() {
 						onClick={() => signOut()}
 						src={session.user?.image!}
 						alt="avatar"
-						className="w-14 h-14 md:h-20 md:w-20 rounded-full mx-auto mb-2 hover:opacity-50 cursor-pointer"
+						className="w-14 h-14  md:h-20 md:w-20 rounded-full mx-auto mb-2 hover:opacity-50 cursor-pointer"
 					/>
 				)}
 				{open && (

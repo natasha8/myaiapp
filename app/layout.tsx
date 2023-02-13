@@ -24,7 +24,7 @@ export default async function RootLayout({
 								<Login />
 							</div>
 						) : (
-							<div className="flex justify-center md:items-center w-screen h-screen  md:bg-black">
+							<div className="flex justify-center md:items-center w-screen h-screen  md:bg-black font-mono">
 								{/* Sidebar */}
 								<div className="h-full w-full md:w-11/12 2xl:w-3/4 flex flex-col items-center md:py-8 md:flex-row ">
 									<div className="w-full fixed top-0 md:static  md:max-w-xs">

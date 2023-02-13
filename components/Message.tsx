@@ -9,8 +9,8 @@ function Message({ message }: Props) {
 
 	return (
 		<div
-			className={`m-2 p-4 border border-opacity-50 rounded-xl ${
-				isMYAI && "bg-purplePlain/50"
+			className={`m-2 p-4 border border-mediumPurple  rounded-xl ${
+				isMYAI && "bg-purplePlain/50 border-ice"
 			}`}
 		>
 			<div className="flex items-center space-x-4">
